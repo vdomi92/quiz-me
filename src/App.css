@@ -1,0 +1,142 @@
+body {
+  background-color: #7cc6fe;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  font-family: 'Verdana', cursive, sans-serif;
+  color: #ffffff;
+}
+
+.quiz-Box {
+  background-color: #252d4a;
+  width: 650px;
+  min-height: 550px;
+  height: min-content;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 10px 10px 42px 0px rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.question-Section {
+  width: 100%;
+  position: relative;
+  height: 90%;
+}
+
+.question-Count {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.question-Text {
+  margin-bottom: 12px;
+}
+
+.answer-Section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+  height: 90%;
+}
+button {
+  width: 100%;
+  height: 64px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #243d97;
+  border-radius: 15px;
+  display: flex;
+  padding: 5px;
+  justify-content: flex-start;
+  align-items: center;
+  border: 5px solid #004f83;
+  cursor: pointer;
+  text-align: start;
+}
+
+button:hover {
+  background-color: #555e7d;
+}
+
+button:focus {
+  outline: none;
+}
+
+.score-Section {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 24px;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.score-Current {
+  width: 100%;
+  text-align: center;
+}
+
+.restart-Button {
+  height: 80px;
+  width: 300px;
+  margin-top: auto;
+  margin-bottom: auto;
+  text-align: center;
+}
+
+.appTitle {
+  text-align: center;
+  color: black;
+  font-size: 48px;
+}
+
+.appDescription {
+  color: black;
+}
+
+.descriptionLink {
+  color: black;
+}
+.descriptionList {
+  color: black;
+}
+
+.timer-Bar {
+  width: 550px;
+  background-color: white;
+  height: 10px;
+  margin-left: 0;
+  margin-right: auto;
+  position: relative;
+  top: 35px;
+}
+
+.timer-Clock {
+  width: 80px;
+  background-color: white;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+.timer-Progress {
+  margin-left: 0;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
+  background-color: green;
+  height: 10px;
+}
