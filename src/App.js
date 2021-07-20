@@ -1,8 +1,6 @@
 import './App.css'
 import { useState, useRef, useEffect } from 'react'
 import questions from './components/Questions'
-import ProgressBar from './components/ProgressBar'
-import CountdownTimer from './components/CountdownTimer'
 
 function App() {
   const [currentQuestionNumber, setCurrentQuestionNumber] = useState(0)
@@ -15,14 +13,17 @@ function App() {
     questionText: 'question',
   })
   const [bgNeutral, setBgNeutral] = useState('#243d97')
-  const [answer, setAnswer] = useState()
+  const [answer, setAnswer] = useState(null)
   const [isDisabled, setIsDisabled] = useState(true)
+  const [timerWidth, setTimerWidth] = useState(0)
+  const timerRef = useRef()
 
   useEffect(() => {
     getNewQuestion()
   }, [currentQuestionNumber])
 
   const getNewQuestion = () => {
+    setAnswer(null)
     const questionIndex = Math.floor(Math.random() * helpRef.current.length)
     setCurrentQuestion(helpRef.current[questionIndex])
     helpRef.current.splice(questionIndex, 1)
@@ -40,7 +41,6 @@ function App() {
     setTimeout(() => findNextQuestion(), 1000)
   }
   const findNextQuestion = () => {
-    setAnswer(null)
     const nextQuestion = currentQuestionNumber + 1
     if (nextQuestion === questions.length) {
       setShowScore(true)
@@ -56,11 +56,46 @@ function App() {
     setShowScore(false)
   }
 
+  const checkCurrentQ = () => {
+    if (currentQuestion === undefined) {
+      return {}
+    } else {
+      return currentQuestion
+    }
+  }
+
+  // const timerHandler = () => {
+  //   if (answer === null && timerWidth < 100.1) {
+  //     timerRef.current = setInterval(() => {
+  //       setTimerWidth(timerWidth + 0.1)
+  //     }, 20)
+  //   } else {
+  //     return clearInterval(timerRef.current)
+  //   }
+  // }
+
+  useEffect(() => {
+    setTimerWidth(0)
+  }, [currentQuestionNumber])
+
+  useEffect(() => {
+    if (answer === null && timerWidth < 100.1) {
+      timerRef.current = setInterval(() => {
+        setTimerWidth(timerWidth + 0.1)
+      }, 20)
+    } else {
+      return clearInterval(timerRef.current)
+    }
+    return () => {
+      clearInterval(timerRef.current)
+    }
+  })
+
   return (
     <>
       <h1 className='appTitle'>Quiz me!</h1>
       <div>
-        <p className='appDescription'>
+        <div className='appDescription'>
           Quiz me! is my take on{' '}
           <a
             rel='noreferrer'
@@ -84,7 +119,7 @@ function App() {
               Answering the questions is time limited.
             </li>
           </ul>
-        </p>
+        </div>
       </div>
       <div className='quiz-Box'>
         {showScore ? (
@@ -112,13 +147,14 @@ function App() {
                   </span>
                 </div>
                 <div className='question-Text'>
-                  {currentQuestion.questionText}
+                  {checkCurrentQ().questionText}
                 </div>
               </div>
             </div>
             <div className='answer-Section'>
               {currentQuestion.answerOptions.map((elem, i) => (
                 <button
+                  key={i}
                   className='answer-Button'
                   onClick={() => handleAnswerClick(elem.isCorrect, i)}
                   style={{
@@ -135,8 +171,13 @@ function App() {
                 </button>
               ))}
             </div>
-            <ProgressBar isDisabled={isDisabled} answer={answer} />
-            <CountdownTimer />
+            <div className='timer-Bar'>
+              <div
+                className='timer-Progress'
+                style={{ width: timerWidth.toString() + '%' }}
+              ></div>
+            </div>
+            <div className='timer-Clock'></div>
           </>
         )}
       </div>
