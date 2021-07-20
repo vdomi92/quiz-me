@@ -23,7 +23,9 @@ function App() {
   }, [currentQuestionNumber])
 
   const getNewQuestion = () => {
-    setAnswer(null)
+    if (answer !== null) {
+      setAnswer(null)
+    }
     const questionIndex = Math.floor(Math.random() * helpRef.current.length)
     setCurrentQuestion(helpRef.current[questionIndex])
     helpRef.current.splice(questionIndex, 1)
@@ -64,16 +66,6 @@ function App() {
     }
   }
 
-  // const timerHandler = () => {
-  //   if (answer === null && timerWidth < 100.1) {
-  //     timerRef.current = setInterval(() => {
-  //       setTimerWidth(timerWidth + 0.1)
-  //     }, 20)
-  //   } else {
-  //     return clearInterval(timerRef.current)
-  //   }
-  // }
-
   useEffect(() => {
     setTimerWidth(0)
   }, [currentQuestionNumber])
@@ -83,8 +75,6 @@ function App() {
       timerRef.current = setInterval(() => {
         setTimerWidth(timerWidth + 0.1)
       }, 20)
-    } else {
-      return clearInterval(timerRef.current)
     }
     return () => {
       clearInterval(timerRef.current)
