@@ -17,6 +17,7 @@ function App() {
   const [isDisabled, setIsDisabled] = useState(true)
   const [timerWidth, setTimerWidth] = useState(0)
   const timerRef = useRef()
+  const [secondsRemaining, setSecondsRemaining] = useState(20)
 
   useEffect(() => {
     getNewQuestion()
@@ -29,7 +30,11 @@ function App() {
     const questionIndex = Math.floor(Math.random() * helpRef.current.length)
     setCurrentQuestion(helpRef.current[questionIndex])
     helpRef.current.splice(questionIndex, 1)
-    setIsDisabled(false)
+    if (isDisabled !== false) {
+      setIsDisabled(false)
+    }
+    setSecondsRemaining(20)
+    console.log(timerRef)
   }
 
   if (highestScore < score) {
@@ -73,11 +78,22 @@ function App() {
   useEffect(() => {
     if (answer === null && timerWidth < 100.1) {
       timerRef.current = setInterval(() => {
+        console.log(timerWidth)
         setTimerWidth(timerWidth + 0.1)
+        if (timerWidth > 100) {
+          findNextQuestion()
+        }
       }, 20)
     }
+
     return () => {
       clearInterval(timerRef.current)
+    }
+  })
+
+  useEffect(() => {
+    if (secondsRemaining > 0) {
+      setTimeout(() => setSecondsRemaining(secondsRemaining - 1), 1000)
     }
   })
 
@@ -167,7 +183,9 @@ function App() {
                 style={{ width: timerWidth.toString() + '%' }}
               ></div>
             </div>
-            <div className='timer-Clock'></div>
+            <div className='timer-Clock'>
+              <span className='timer-Numbers'>{secondsRemaining}</span>
+            </div>
           </>
         )}
       </div>
