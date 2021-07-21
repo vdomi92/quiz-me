@@ -95,12 +95,12 @@ const questions = [
     ],
   },
   {
-    questionText: 'Question ten',
+    questionText: 'Babel is a ______',
     answerOptions: [
-      { answerText: 'a', isCorrect: true },
-      { answerText: 'b', isCorrect: false },
-      { answerText: 'c', isCorrect: false },
-      { answerText: 'd', isCorrect: false },
+      { answerText: 'Compiler', isCorrect: false },
+      { answerText: 'Transpiler', isCorrect: false },
+      { answerText: 'Both', isCorrect: true },
+      { answerText: 'None of the above', isCorrect: false },
     ],
   },
 ]

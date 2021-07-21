@@ -115,21 +115,22 @@ button:focus {
 }
 
 .timer-Bar {
-  width: 550px;
+  width: 600px;
   background-color: white;
   height: 10px;
-  margin-left: 0;
+  margin-left: 10px;
   margin-right: auto;
   position: relative;
   top: 35px;
 }
 
 .timer-Clock {
-  width: 80px;
-  background-color: white;
   margin-left: 10px;
-  margin-right: 10px;
-  border-radius: 50%;
+  margin-right: auto;
+  height: 30px;
+  font-size: 32px;
+  position: relative;
+  top: 30px;
 }
 .timer-Progress {
   margin-left: 0;
@@ -139,10 +140,4 @@ button:focus {
   padding: 0;
   background-color: green;
   height: 10px;
-}
-.timer-Numbers {
-  position: relative;
-  top: 30px;
-  left: 30px;
-  color: black;
 }

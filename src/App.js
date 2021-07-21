@@ -17,9 +17,11 @@ function App() {
   const [isDisabled, setIsDisabled] = useState(true)
   const [timerWidth, setTimerWidth] = useState(0)
   const timerRef = useRef()
+  const clockRef = useRef()
   const [secondsRemaining, setSecondsRemaining] = useState(20)
 
   useEffect(() => {
+    setSecondsRemaining(20)
     getNewQuestion()
   }, [currentQuestionNumber])
 
@@ -33,8 +35,6 @@ function App() {
     if (isDisabled !== false) {
       setIsDisabled(false)
     }
-    setSecondsRemaining(20)
-    console.log(timerRef)
   }
 
   if (highestScore < score) {
@@ -78,12 +78,11 @@ function App() {
   useEffect(() => {
     if (answer === null && timerWidth < 100.1) {
       timerRef.current = setInterval(() => {
-        console.log(timerWidth)
         setTimerWidth(timerWidth + 0.1)
         if (timerWidth > 100) {
           findNextQuestion()
         }
-      }, 20)
+      }, 19)
     }
 
     return () => {
@@ -91,11 +90,15 @@ function App() {
     }
   })
 
-  useEffect(() => {
-    if (secondsRemaining > 0) {
-      setTimeout(() => setSecondsRemaining(secondsRemaining - 1), 1000)
-    }
-  })
+  // useEffect(() => {
+  //   if (answer === null && secondsRemaining > 0) {
+  //     clockRef.current = setTimeout(() => {
+  //       setSecondsRemaining(secondsRemaining - 1)
+  //     }, 1000)
+  //   } else if (secondsRemaining === 0 || answer !== null) {
+  //     clearTimeout(clockRef)
+  //   }
+  // })
 
   return (
     <>
@@ -177,14 +180,16 @@ function App() {
                 </button>
               ))}
             </div>
+            <div className='timer-Clock'>
+              <span className='timer-Numbers'>
+                Time left: {/* {secondsRemaining} */}
+              </span>
+            </div>
             <div className='timer-Bar'>
               <div
                 className='timer-Progress'
                 style={{ width: timerWidth.toString() + '%' }}
               ></div>
-            </div>
-            <div className='timer-Clock'>
-              <span className='timer-Numbers'>{secondsRemaining}</span>
             </div>
           </>
         )}
