@@ -130,7 +130,7 @@ button:focus {
   height: 30px;
   font-size: 32px;
   position: relative;
-  top: 30px;
+  top: 50px;
 }
 .timer-Progress {
   margin-left: 0;

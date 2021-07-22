@@ -182,7 +182,7 @@ function App() {
             </div>
             <div className='timer-Clock'>
               <span className='timer-Numbers'>
-                Time left: {/* {secondsRemaining} */}
+                Time left {/* {secondsRemaining} */}
               </span>
             </div>
             <div className='timer-Bar'>
