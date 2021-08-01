@@ -61,6 +61,10 @@ function App() {
     setCurrentQuestionNumber(0)
     setScore(0)
     setShowScore(false)
+    clearInterval(timerRef.current)
+    clearTimeout(clockRef)
+    setSecondsRemaining(20)
+    setTimerWidth(0)
   }
 
   const checkCurrentQ = () => {
