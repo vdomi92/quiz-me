@@ -79,11 +79,11 @@ function App() {
     if (answer === null && timerWidth < 100.1) {
       timerRef.current = setInterval(() => {
         setTimerWidth(timerWidth + 0.1)
-        if (timerWidth > 100) {
+        if (timerWidth >= 100) {
           findNextQuestion()
           setSecondsRemaining(20)
         }
-      }, 19)
+      }, 20)
     }
 
     return () => {
@@ -94,9 +94,9 @@ function App() {
   useEffect(() => {
     if (answer === null && secondsRemaining > 0) {
       clockRef.current = setTimeout(() => {
-        setSecondsRemaining(secondsRemaining - 1)
-      }, 1000)
-    } else if (secondsRemaining === 0 || answer !== null) {
+        setSecondsRemaining(secondsRemaining - 0.02)
+      }, 20)
+    } else if (secondsRemaining <= 0 || answer !== null) {
       clearTimeout(clockRef)
     }
   })
@@ -183,7 +183,7 @@ function App() {
             </div>
             <div className='timer-Clock'>
               <span className='timer-Numbers'>
-                Time left {secondsRemaining}
+                Time left {parseFloat(secondsRemaining).toFixed(1)}
               </span>
             </div>
             <div className='timer-Bar'>
